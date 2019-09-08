@@ -45,7 +45,7 @@ public class Storage {
     }
 
     /**
-     * Uses StringBuffer to append string of tasks obtained from tastEntered into format required to put into duke.txt.
+     * Uses StringBuffer to append string of tasks obtained from taskEntered into format required to put into duke.txt.
      * public method called by writeToFile, which is called each time Command.execute is run.
      *
      * @param taskEntered ArrayList of Tasks obtained from the TaskList class.
@@ -96,6 +96,7 @@ public class Storage {
                     this.checkIfDone(d,inputsplit[1]);
                     retrievedTask.add(d);
                 } else {
+                    assert inputsplit[0].equalsIgnoreCase("[E]") : "Error in save file";
                     LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
                     Event e = new Event(inputsplit[2], ldt);
                     this.checkIfDone(e,inputsplit[1]);

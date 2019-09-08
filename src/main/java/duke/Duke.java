@@ -43,35 +43,11 @@ public class Duke {
         }
     }
 
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
-
-    /**
-     * First greets the user then enters a loop which includes the Command Pattern, reading the user input
-     * using Ui then calling command.execute().
-     */
-//    public void run() {
-//        userIF.printHello();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = userIF.readCommand();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, userIF, storage);
-//                isExit = c.shouldExit();
-//            } catch (DukeException e) {
-//                userIF.printError(e.getMessage());
-//            }
-//        }
-//    }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        //userIF.printHello();
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, userIF, storage);

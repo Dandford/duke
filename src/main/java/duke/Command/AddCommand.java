@@ -49,6 +49,7 @@ public class AddCommand extends Command {
             LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
             taskToAdd = new Deadline(descripSplit[0],ldt);
         } else {
+            assert typeTask.equalsIgnoreCase("event");
             String[] descripSplit = inputsplit[1].split(" /at ", 2);
             LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
             taskToAdd = new Event(descripSplit[0], ldt);
