@@ -6,6 +6,7 @@ import duke.helper.DukeException;
 import duke.task.TaskList;
 import duke.task.Task;
 
+import java.lang.reflect.InvocationTargetException;
 
 public class DoneCommand extends Command {
 
@@ -31,19 +32,23 @@ public class DoneCommand extends Command {
      * or when there is an invalid value for done command or if the task is already done,or the Storage Class.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] inputsplit = this.inputCommand.split(" ", 2);
-        if (inputsplit.length <= 1) {
-            throw new DukeException("OOPS!!! The description of done must have a value.");
-        } else if (Integer.parseInt(inputsplit[1]) > tasks.getSize() || Integer.parseInt(inputsplit[1]) <= 0) {
-            throw new DukeException("OOPS!!! Invalid value for task done!");
-        } else if (tasks.getTask(Integer.parseInt(inputsplit[1])).getIsDone() == true) {
-            throw new DukeException("OOPS!!! Task is already done!");
-        } else {
-            int num = Integer.parseInt(inputsplit[1]);
-            Task t =  tasks.getTask(num);
-            t.markIsDone();
-            storage.writeToFile(tasks.getTaskList());
-            return ui.printDone(t);
+        try {
+            String[] inputsplit = this.inputCommand.split(" ", 2);
+            int taskNumber = Integer.parseInt(inputsplit[1]);
+            if (inputsplit.length <= 1) {
+                throw new DukeException("OOPS!!! The description of done must have a value.");
+            } else if ( taskNumber > tasks.getSize() || taskNumber <= 0) {
+                throw new DukeException("OOPS!!! Invalid value for task done!");
+            } else if (tasks.getTask(taskNumber).getIsDone() == true) {
+                throw new DukeException("OOPS!!! Task is already done!");
+            } else {
+                Task t = tasks.getTask(taskNumber);
+                t.markIsDone();
+                storage.writeToFile(tasks.getTaskList());
+                return ui.printDone(t);
+            }
+        } catch (NumberFormatException e ) {
+            throw new DukeException("OOPS!!! The description of done must be a number.");
         }
     }
 

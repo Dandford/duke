@@ -39,9 +39,17 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.setDialogBoxContent(text);
+        this.setDialogBoxImage(img);
+    }
+
+    private void setDialogBoxContent(String text) {
         dialog.setText(text);
         Text t = new Text(text);
         dialog.setMinHeight(t.getLayoutBounds().getHeight()); // +20 is for paddings
+    }
+
+    private void setDialogBoxImage(Image img) {
         Circle myCircle = new Circle(45, 45, 40);
         displayPicture.setImage(img);
         displayPicture.setClip(myCircle);

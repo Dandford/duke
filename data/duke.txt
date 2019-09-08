@@ -1,10 +1,2 @@
-[T]|false|borrow book
-[T]|false|borrow book
-[T]|false|borrow li
-[T]|false|borrow book
-[T]|false|sleep
-[T]|false|sleep
-[T]|false|borrow book
-[T]|false|sleep
-[T]|false|borrow book
-[T]|false|sleep
+[T]|true|borrow book
+[T]|false|sing song

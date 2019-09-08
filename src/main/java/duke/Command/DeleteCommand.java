@@ -31,15 +31,19 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = inputCommand.split(" ", 2);
-        if (inputsplit.length <= 1) {
-            throw new DukeException("OOPS!!! The description of delete must have a value.");
-        } else if (Integer.parseInt(inputsplit[1]) > tasks.getSize() || Integer.parseInt(inputsplit[1]) <= 0) {
-            throw new DukeException("OOPS!!! Invalid value for task delete!");
-        } else {
-            int num = Integer.parseInt(inputsplit[1]);
-            Task t = tasks.removeTask(num);
-            storage.writeToFile(tasks.getTaskList());
-            return ui.printDelete(t, tasks.getSize());
+        try {
+            if (inputsplit.length <= 1) {
+                throw new DukeException("OOPS!!! The description of delete must have a value.");
+            } else if (Integer.parseInt(inputsplit[1]) > tasks.getSize() || Integer.parseInt(inputsplit[1]) <= 0) {
+                throw new DukeException("OOPS!!! Invalid value for task delete!");
+            } else {
+                int num = Integer.parseInt(inputsplit[1]);
+                Task t = tasks.removeTask(num);
+                storage.writeToFile(tasks.getTaskList());
+                return ui.printDelete(t, tasks.getSize());
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! The description of delete must be a number.");
         }
     }
 }

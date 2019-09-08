@@ -54,13 +54,8 @@ public class Storage {
         StringBuffer toWrite = new StringBuffer("");
         for (int i = 0; i < taskEntered.size(); i++) {
             Task t = taskEntered.get(i);
-            String s;
-            if (t.getType().equalsIgnoreCase("[T]")) {
-                s = t.getType() + "|" + t.getIsDone() + "|" + t.getDescription() + "\n";
-            } else {
-                s = t.getType() + "|" + t.getIsDone() + "|" + t.getDescription()  + "\n";
-            }
-            toWrite.append(s);
+            String appendedString = t.getType() + "|" + t.getIsDone() + "|" + t.getDescription() + "\n";
+            toWrite.append(appendedString);
         }
         return toWrite.toString();
     }
@@ -77,6 +72,7 @@ public class Storage {
         try {
             File taskStorage = new File(fileName);
             File directoryStorage = new File(direcName);
+            //checks if the file exists
             if (!taskStorage.getAbsoluteFile().exists()) {
                 directoryStorage.mkdir();
                 taskStorage.createNewFile();
@@ -86,22 +82,20 @@ public class Storage {
             while (s.hasNext()) {
                 //note that | is known as || in java
                 String[] inputsplit = s.nextLine().split("\\|");
-                if (inputsplit[0].equalsIgnoreCase("[T]")) {
-                    ToDo t = new ToDo(inputsplit[2]);
-                    this.checkIfDone(t,inputsplit[1]);
-                    retrievedTask.add(t);
-                } else if (inputsplit[0].equalsIgnoreCase("[D]")) {
+                String taskType = inputsplit[0];
+                Task t;
+                if (taskType.equalsIgnoreCase("[T]")) {
+                    t = new ToDo(inputsplit[2]);
+                } else if (taskType.equalsIgnoreCase("[D]")) {
                     LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
-                    Deadline d = new Deadline(inputsplit[2], ldt);
-                    this.checkIfDone(d,inputsplit[1]);
-                    retrievedTask.add(d);
+                    t = new Deadline(inputsplit[2], ldt);
                 } else {
-                    assert inputsplit[0].equalsIgnoreCase("[E]") : "Error in save file";
+                    assert taskType.equalsIgnoreCase("[E]") : "Error in save file";
                     LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
-                    Event e = new Event(inputsplit[2], ldt);
-                    this.checkIfDone(e,inputsplit[1]);
-                    retrievedTask.add(e);
+                    t = new Event(inputsplit[2], ldt);
                 }
+                this.checkIfDone(t,inputsplit[1]);
+                retrievedTask.add(t);
             }
             return retrievedTask;
         } catch (Exception e) {
