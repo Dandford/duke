@@ -58,6 +58,7 @@ public class Ui {
                 + " tasks in the list.");
         return toPrint;
     }
+
     /**
      * Prints notification that the task has been done.
      */
@@ -83,6 +84,15 @@ public class Ui {
         for (int i = 0; i < inputList.size(); i++) {
             toPrint = toPrint + ((i + 1) + "." + inputList.get(i).toString() + "\n");
         }
+        return toPrint;
+    }
+
+    /**
+     * Prints the task that has been updated.
+     */
+    public String printUpdate(Task t, int sizeOfTask) {
+        String toPrint = ("Got it. I've updated this task: \n  " + t.toString() + "\nNow you have " + sizeOfTask
+                + " tasks in the list.");
         return toPrint;
     }
 

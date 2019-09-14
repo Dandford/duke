@@ -17,13 +17,12 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Assigns the boolean shouldExit as true from parent class Command, thus terminating the for loop and closing Duke.
-     * public method called by Duke.run() in the for loop as part of the Command Pattern.
-     * Needs to be implemented as inherited from Command abstract method.
+     * Assigns the boolean shouldExit as true, thus terminating the for loop and closing Duke.
      *
-     * @param tasks TaskList passed from the Duke main class, containing Array of Tasks.
-     * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.
-     * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
+     * @param tasks Array of Tasks.
+     * @param ui Ui for printing output.
+     * @param storage Storage to update textfile.
+     * @return feedback message to update user.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         this.shouldExit = true;

@@ -17,9 +17,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Calls Ui to print the list of tasks which is obtained from TaskList tasks.
-     * public method called by Duke.run() in the for loop as part of the Command Pattern.
-     * Needs to be implemented as inherited from Command abstract method.
+     * Prints the list of tasks which is obtained from TaskList tasks.
      *
      * @param tasks TaskList passed from the Duke main class, containing Array of Tasks.
      * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.

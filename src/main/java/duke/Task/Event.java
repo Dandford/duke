@@ -19,6 +19,11 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    @Override
+    public void updateTime(LocalDateTime updtTime) {
+        this.eventTime = updtTime;
+    }
+
     /**
      * Abstract method implemented from parent Task.
      *

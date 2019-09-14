@@ -11,9 +11,9 @@ public abstract class Command {
 
     /**
      * Constructor for Command which will be inherited by all other commands.
+     * shouldExit is the boolean that will stop the for loop and exit the program, by default is false.
      *
      * @param inputCommand String that is parsed from the Parser.
-     * shouldExit is the boolean that will stop the for loop and exit the program.
      */
     public Command(String inputCommand) {
         this.inputCommand = inputCommand;
@@ -21,24 +21,19 @@ public abstract class Command {
     }
 
     /**
-     * Checks if the for loop should continue.public method called by Duke.run() in the for loop to
-     * Inherited by all child classes as all Command classes need to check if should end for loop.
+     * Checks if the for loop should continue.
      *
-     * @return shouldExit is the boolean that will stop the for loop and exit the program.
+     * @return true which will stop the for loop and exit the program.
      */
     public boolean shouldExit() {
         return this.shouldExit;
     }
 
-    /**
-     * abstract method called by Duke.run() in the for loop.
-     * Inherited by all child classes as it's the core of CommandPattern.
-     *
-     * @param tasks TaskList passed from the Duke main class, containing Array of Tasks.
-     * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.
-     * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
-     * @throws DukeException which will be dealed with by the Duke class.
-     */
+   /**
+    * Executes the commands on Duke.
+    *
+    * @return feedback message to update user.
+    */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

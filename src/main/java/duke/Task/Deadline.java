@@ -19,6 +19,11 @@ public class Deadline extends Task {
         this.deadlineTime = by;
     }
 
+    @Override
+    public void updateTime(LocalDateTime updtTime) {
+        this.deadlineTime = updtTime;
+    }
+
     /**
      * Returns a string based on the deadline descriptions and formats the LocalDateTime output.
      * Abstract method implemented from parent Task.

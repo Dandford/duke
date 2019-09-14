@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -30,6 +32,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public void updateDescrip(String text) {
+        this.description = text;
+    }
+
     /**
      * Called to provide tick or cross symbols to be printed out.
      *
@@ -37,6 +43,10 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]"); //return tick or X symbols
+    }
+
+    public void updateTime(LocalDateTime updtTime) {
+        return;
     }
 
     /**
@@ -51,5 +61,7 @@ public abstract class Task {
     public abstract String getType();
 
     public abstract String getDescription();
+
+//    public abstract void updateTime(LocalDateTime ldt);
 
 }

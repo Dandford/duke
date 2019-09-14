@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    public void greet(){
+    public void greet() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.sayHello(), dukeImage)
         );
@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if(input.equalsIgnoreCase("")){
+        if (input.equalsIgnoreCase("")) {
             return ;
         }
         dialogContainer.getChildren().addAll(
@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if(input.equalsIgnoreCase("bye")) {
+        if (input.equalsIgnoreCase("bye")) {
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
             // schedule a exit task
             Runnable task = () -> System.exit(0);

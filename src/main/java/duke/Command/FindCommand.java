@@ -19,16 +19,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Reads and creates new ToDo, Event or Deadline based on the parsed input.
-     * public method called by Duke.run() in the for loop as part of the Command Pattern.
-     * Needs to be implemented as inherited from Command abstract method.
-     * Uses Ui class to print responses and TaskList to obtain the shortlisted and found arraylist.
+     * Reads and filters tasks based on the keyword of parsed input.
      *
-     * @param tasks TaskList passed from the Duke main class, containing Array of Tasks.
-     * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.
-     * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
-     * @throws DukeException which can come from one sources, itself if the description of the find is empty or has more
-     * than one keyword
+     * @param tasks Array of Tasks.
+     * @param ui Ui for printing output.
+     * @param storage Storage to update textfile.
+     * @return feedback message to update user.
+     * @throws DukeException for incorrect user input.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = this.inputCommand.split(" ");

@@ -24,35 +24,38 @@ public class AddCommand extends Command {
 
     /**
      * Reads and creates new ToDo, Event or Deadline based on the parsed input.
-     * public method called by Duke.run() in the for loop as part of the Command Pattern.
-     * Needs to be implemented as inherited from Command abstract method.
-     * Uses Storage Class to write to file duke.txt, Ui class to print responses and TaskList to store the arraylist.
      *
-     * @param tasks TaskList passed from the Duke main class, containing Array of Tasks.
-     * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.
-     * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
-     * @throws DukeException which can come from two sources, itself if the description of the Task is empty or
-     * from the Storage Class.
+     * @param tasks Array of Tasks.
+     * @param ui Ui for printing output.
+     * @param storage Storage to update textfile.
+     * @return feedback message to update user.
+     * @throws DukeException for incorrect user input.
      */
     //note private can't be accessed by child
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = this.inputCommand.split(" ", 2);
-        String typeTask = inputsplit[0];
+        String typeTask = inputsplit[0].toLowerCase();
         if (inputsplit.length <= 1) {
             throw new DukeException("OOPS!!! The description of a " + typeTask + " cannot be empty.");
         }
         Task taskToAdd;
-        if (typeTask.equalsIgnoreCase("todo")) {
+        switch (typeTask) {
+        case "todo":
             taskToAdd = new ToDo(inputsplit[1]);
-        } else if (typeTask.equalsIgnoreCase("deadline")) {
+            break;
+        case "deadline":
             String[] descripSplit = inputsplit[1].split(" /by ", 2);
             LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
-            taskToAdd = new Deadline(descripSplit[0],ldt);
-        } else {
-            assert typeTask.equalsIgnoreCase("event");
+            taskToAdd = new Deadline(descripSplit[0], ldt);
+            break;
+        case "event":
             String[] descripSplit = inputsplit[1].split(" /at ", 2);
             LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
             taskToAdd = new Event(descripSplit[0], ldt);
+            break;
+        default:
+            throw new DukeException("OOPS!!! Please specify a valid type of task!");
+            break;
         }
         tasks.addToRecord(taskToAdd);
         storage.writeToFile(tasks.getTaskList());
