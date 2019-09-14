@@ -68,7 +68,6 @@ public class UpdateCommand extends Command {
             break;
         default:
             throw new DukeException("OOPS!!! Please specify if you want to modify the description or time");
-            break;
         }
     }
 }

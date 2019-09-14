@@ -25,29 +25,22 @@ public class Parser {
         switch (parsedString) {
         case "list" :
             return new ListCommand(inputCommand);
-            break;
         case "done" :
             return new DoneCommand(inputCommand);
-            break;
         case "todo" :
         case "deadline":
         case "event":
             return new AddCommand(inputCommand);
-            break;
         case "delete":
             return new DeleteCommand(inputCommand);
-            break;
         case "find":
             return new FindCommand(inputCommand);
-            break;
         case "update":
             return new UpdateCommand(inputCommand);
         case "bye":
             return new ExitCommand(inputCommand);
-            break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            break;
         }
     }
 }

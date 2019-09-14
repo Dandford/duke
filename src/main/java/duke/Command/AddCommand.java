@@ -39,23 +39,24 @@ public class AddCommand extends Command {
             throw new DukeException("OOPS!!! The description of a " + typeTask + " cannot be empty.");
         }
         Task taskToAdd;
+        String[] descripSplit;
+        LocalDateTime ldt;
         switch (typeTask) {
         case "todo":
             taskToAdd = new ToDo(inputsplit[1]);
             break;
         case "deadline":
-            String[] descripSplit = inputsplit[1].split(" /by ", 2);
-            LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
+            descripSplit = inputsplit[1].split(" /by ", 2);
+            ldt = DateTimeHelper.formatInput(descripSplit[1]);
             taskToAdd = new Deadline(descripSplit[0], ldt);
             break;
         case "event":
-            String[] descripSplit = inputsplit[1].split(" /at ", 2);
-            LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
+            descripSplit = inputsplit[1].split(" /at ", 2);
+            ldt = DateTimeHelper.formatInput(descripSplit[1]);
             taskToAdd = new Event(descripSplit[0], ldt);
             break;
         default:
             throw new DukeException("OOPS!!! Please specify a valid type of task!");
-            break;
         }
         tasks.addToRecord(taskToAdd);
         storage.writeToFile(tasks.getTaskList());
